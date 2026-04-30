@@ -1,10 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const c = require('../controllers/itemController');
-const auth = require('../middleware/auth');
-const { validateItem } = require('../middleware/validate');
+const router = require('express').Router();
+const auth = require('../middleware/authMiddleware');
+const itemController = require('../controllers/itemController');
 
-router.get('/', auth, c.getItems);
-router.post('/', auth, validateItem, c.createItem);
+// 🔒 PROTECTED ROUTE
+router.get('/', auth, itemController.getItems);
 
 module.exports = router;
